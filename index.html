@@ -378,19 +378,18 @@
           <div class="form-volunteer">
             
             <h2>Be A Volunteer Today</h2>
-            <form action="#" method="post">
+            <form action="#" id="myForm" method="post">
               <div class="form-group">
                 <!-- <label for="name">Name</label> -->
-                <input type="text" class="form-control py-2" id="name" placeholder="Enter your name">
+                <input type="text" class="form-control py-2" name="name" id="name" placeholder="Enter your name">
               </div>
               <div class="form-group">
                 <!-- <label for="email">Email</label> -->
-                <input type="text" class="form-control py-2" id="email" placeholder="Enter your email">
-              </div>
+                <input type="text" class="form-control py-2" name="email" id="email" placeholder="Enter your email">
+              </div>  
               <div class="form-group">
                 <!-- <label for="v_message">Email</label> -->
-                <textarea name="v_message" id="" cols="30" rows="3" class="form-control py-2" placeholder="Write your message"></textarea>
-                <!-- <input type="text" class="form-control py-2" id="email"> -->
+                <textarea  id="message" cols="30" rows="3" class="form-control py-2" name="message" placeholder="Write your message"></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-white px-5 py-2" value="Send">
@@ -464,7 +463,7 @@
               <ul>
                 <li><span class="icon icon-map-marker"></span><span class="text">Kigali Rwanda </span></li>
                 <li><a href="#"><span class="icon icon-phone"></span><span class="text">+250 784425115</span></a></li>
-                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">EjoNiHeza@gmail.com</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">EjoNiHeza250@gmail.com</span></a></li>
               </ul>
             </div>
         </div>
@@ -507,6 +506,44 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <!-- email js  -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+  <script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "JEke8Pncrhz6FKrPM",
+        
+      });
+   })();
+</script>
+
+<script type="text/javascript">
+  (function(){
+     emailjs.init("JEke8Pncrhz6FKrPM");
+  })();
+
+  document.getElementById('myForm').addEventListener('submit', function(event) {
+     event.preventDefault();
+     var templateParams = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+     };
+     emailjs.send('service_dj9crnt', 'template_7p6gs7f', templateParams)
+        .then(function(response) {
+           console.log('Success!', response.status, response.text);
+           alert('Your message has been sent successfully!');
+        }, function(error) {
+           console.log('Failed...', error);
+           alert('Sorry, an error occurred. Please try again later.');
+        });
+  });
+</script>
+
     
   </body>
 </html>
